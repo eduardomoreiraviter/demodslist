@@ -3,6 +3,7 @@ package com.viter.demoDsList.services;
 import com.viter.demoDsList.dto.GameDTO;
 import com.viter.demoDsList.dto.GameMinDTO;
 import com.viter.demoDsList.entities.Game;
+import com.viter.demoDsList.projections.GameMinProjection;
 import com.viter.demoDsList.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,11 @@ public class GameService {
         List<Game> result = repository.findAll();
         List<GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList();
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId){
+        List<GameMinProjection> result = repository.searchByList(listId);
+        return result.stream().map(x -> new GameMinDTO(x)).toList();
     }
 }

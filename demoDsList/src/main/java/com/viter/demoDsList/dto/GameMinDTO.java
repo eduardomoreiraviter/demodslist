@@ -1,6 +1,7 @@
 package com.viter.demoDsList.dto;
 
 import com.viter.demoDsList.entities.Game;
+import com.viter.demoDsList.projections.GameMinProjection;
 import jakarta.persistence.Column;
 
 public class GameMinDTO {
@@ -20,6 +21,14 @@ public class GameMinDTO {
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         shortDescription = entity.getShortDescription();
+    }
+
+    public GameMinDTO(GameMinProjection projection) {
+        id = projection.getId();
+        title = projection.getTitle();
+        year = projection.getYear();
+        imgUrl = projection.getImgUrl();
+        shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {
